@@ -1,0 +1,46 @@
+#include <stdio.h>
+static const int FAC[] = {1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880};
+int shuzu[10] = {0};
+int contor(int *a, int n)
+{
+    int x = 0;
+    for (int i = 0; i < n; ++i) {
+        int smaller = 0; 
+        for (int j = i + 1; j < n; ++j) {
+            if (a[j] < a[i])
+                smaller++;
+        }
+        x += FAC[n - i - 1] * smaller; 
+    }
+    return x;
+}
+int num(int n)
+{
+    int a=n,b=0;
+    while(a!=0)
+    {
+        a = a/10;
+        b++;
+    }
+    return b;
+}
+int *chai(int a)
+{
+    int i,n = num(a);
+    int a1 = a;
+    for(i = n-1;i>=0;i--)
+    {
+        shuzu[i] = a1%10;
+        a1 = a1/10;
+    }
+    return shuzu;
+}
+int main()
+{
+    int a;
+    while(scanf("%d",&a),a)
+    {
+        printf("contor :%d\n",contor(chai(a),num(a)));
+    }
+    return 0;
+}
